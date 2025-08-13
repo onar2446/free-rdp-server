@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+	<h2>ابحث عن أقرب المدارس للتقديم</h2>
+	<p class="muted">سجّل بياناتك واكتب العنوان أو استخدم موقعي الحالي للعثور على أقرب المدارس في مصر.</p>
+	{% if error_message %}
+		<div class="alert">{{ error_message }}</div>
+	{% endif %}
+	<form method="post" action="{{ url_for('register') }}" class="form-grid" id="teacher-form">
+		<div class="form-row">
+			<label for="full_name">الاسم الكامل</label>
+			<input id="full_name" name="full_name" type="text" placeholder="مثال: أحمد محمود" required />
+		</div>
+		<div class="form-row">
+			<label for="phone">رقم الموبايل</label>
+			<input id="phone" name="phone" type="tel" placeholder="01xxxxxxxxx" />
+		</div>
+		<div class="form-row">
+			<label for="email">البريد الإلكتروني</label>
+			<input id="email" name="email" type="email" placeholder="name@example.com" />
+		</div>
+		<div class="form-row">
+			<label for="subject">التخصص</label>
+			<input id="subject" name="subject" type="text" placeholder="مثال: رياضيات، عربي، علوم" />
+		</div>
+		<div class="form-row">
+			<label for="experience_years">سنوات الخبرة</label>
+			<input id="experience_years" name="experience_years" type="number" min="0" max="50" step="1" placeholder="0" />
+		</div>
+		<div class="form-row">
+			<label for="address">العنوان / المنطقة</label>
+			<input id="address" name="address" type="text" placeholder="مثال: مدينة نصر، القاهرة" />
+		</div>
+		<div class="form-row inline">
+			<div>
+				<label for="radius_km">نطاق البحث (كم)</label>
+				<input id="radius_km" name="radius_km" type="number" min="1" max="50" step="1" value="5" />
+			</div>
+			<div class="inline-actions">
+				<button type="button" id="use-location" class="secondary">استخدم موقعي الحالي</button>
+				<span id="loc-status" class="muted"></span>
+			</div>
+		</div>
+		<input type="hidden" id="lat" name="lat" />
+		<input type="hidden" id="lon" name="lon" />
+		<div class="form-actions">
+			<button type="submit" class="primary">ابحث عن أقرب المدارس</button>
+		</div>
+	</form>
+</section>
+{% endblock %}
