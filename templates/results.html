@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+	<h2>النتائج الأقرب</h2>
+	<p class="muted">العنوان: {{ address or 'حسب الموقع' }} — نطاق البحث: {{ radius_km }} كم</p>
+	<div id="map" class="map"></div>
+	<hr />
+	<ol class="results">
+		{% if results_json %}
+			{# The list will be rendered by JS too, but we can also provide a basic progressive list #}
+		{% endif %}
+	</ol>
+	<div class="actions">
+		<a class="secondary" href="{{ url_for('index') }}">بحث جديد</a>
+	</div>
+</section>
+
+<script>
+window.SEARCH_DATA = {{ results_json | safe }};
+</script>
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+	integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+	crossorigin=""
+/>
+<script
+	src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+	integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+	crossorigin=""
+></script>
+{% endblock %}
